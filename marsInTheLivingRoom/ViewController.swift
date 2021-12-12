@@ -17,17 +17,29 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         // Set the view's delegate
-        sceneView.delegate = self
+      
         
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        let sphere = SCNSphere(radius: 0.2)
+        
+        let material = SCNMaterial()
+        
+        material.diffuse.contents = UIImage(named: "art.scnassets/2k_mars.jpeg")
+        
+        sphere.materials = [material]
+        
+        let node = SCNNode()
+        
+        node.position = SCNVector3(x: 0, y: 0, z: -1)
+        
+        node.geometry = sphere
+        
+        sceneView.scene.rootNode.addChildNode(node)
+    }
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
-        // Set the scene to the view
-        sceneView.scene = scene
-    }
+       
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
